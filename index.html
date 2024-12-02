@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Price Prediction - AAPL</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <style>
+        .container {
+            margin-top: 30px;
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .result-section {
+            margin-top: 30px;
+        }
+        .img-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .img-container img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center my-4">Stock Price Prediction for Apple (AAPL)</h1>
+        
+        <!-- Sentiment Analysis Section -->
+        <div class="card">
+            <div class="card-header">
+                <h4>Sentiment Analysis of News Headlines</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>News Headline</th>
+                            <th>Sentiment Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for headline, sentiment in sentiment_scores %}
+                        <tr>
+                            <td>{{ headline }}</td>
+                            <td>{{ sentiment }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Mean Absolute Error Section -->
+        <div class="result-section">
+            <div class="alert alert-info" role="alert">
+                <strong>Model Performance:</strong> The Mean Absolute Error (MAE) of the stock prediction model is: <strong>{{ mae }}</strong>
+            </div>
+        </div>
+
+        <!-- Actual vs Predicted Stock Prices Image -->
+        <div class="img-container">
+            <h4>Actual vs Predicted Stock Prices</h4>
+            <img src="{{ url_for('static', filename='actual_vs_predicted.png') }}" alt="Actual vs Predicted Stock Prices">
+        </div>
+
+        <!-- ARIMA Forecast Section -->
+        <div class="img-container">
+            <h4>ARIMA Forecast for Future Stock Prices</h4>
+            <img src="{{ url_for('static', filename='arima_forecast.png') }}" alt="ARIMA Forecast">
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js (for dropdowns, modals, etc.) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
